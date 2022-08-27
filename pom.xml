@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.41</version>
+        <version>4.47</version>
         <relativePath />
     </parent>
     <artifactId>github-branch-source</artifactId>
@@ -24,7 +24,7 @@
         <changelist>999999-SNAPSHOT</changelist>
         <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
         <hpi.compatibleSinceVersion>2.2.0</hpi.compatibleSinceVersion>
-        <jenkins.version>2.332.1</jenkins.version>
+        <jenkins.version>2.346.1</jenkins.version>
         <useBeta>true</useBeta>
     </properties>
 
@@ -112,7 +112,7 @@
         <dependency>
             <groupId>io.jenkins.plugins</groupId>
             <artifactId>pipeline-groovy-lib</artifactId>
-            <version>589.vb_a_b_4a_a_8c443c</version> <!-- TODO until in BOM -->
+            <version>612.v84da_9c54906d</version> <!-- TODO until in BOM -->
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -136,8 +136,8 @@
         <dependencies>
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
-                <artifactId>bom-2.332.x</artifactId>
-                <version>1461.vb_3c6de28f2b_a_</version>
+                <artifactId>bom-2.346.x</artifactId>
+                <version>1595.v8c71c13cc3a_9</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -153,7 +153,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.23.0</version>
+                <version>2.24.1</version>
                 <executions>
                     <execution>
                         <id>spotless-check</id>
