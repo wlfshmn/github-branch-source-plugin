@@ -179,7 +179,11 @@ public class EventsTest {
   public void given_ghPullRequestEventConvertedToDraft_then_updatedHeadEventFired()
       throws Exception {
     PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
-
+    firedEventCauses =
+        new Cause[] {
+          new GitHubSenderCause(
+              6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
     firedEventType = SCMEvent.Type.UPDATED;
     ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdatedConvertedToDraft.json");
     waitAndAssertReceived(true);
@@ -188,7 +192,11 @@ public class EventsTest {
   @Test
   public void given_ghPullRequestEventReadyForReview_then_updatedHeadEventFired() throws Exception {
     PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
-
+    firedEventCauses =
+        new Cause[] {
+          new GitHubSenderCause(
+              6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
     firedEventType = SCMEvent.Type.UPDATED;
     ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdatedReadyForReview.json");
     waitAndAssertReceived(true);

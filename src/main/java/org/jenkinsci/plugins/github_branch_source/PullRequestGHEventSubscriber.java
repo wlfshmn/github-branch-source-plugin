@@ -209,7 +209,9 @@ public class PullRequestGHEventSubscriber extends GHEventsSubscriber {
         kind = GitHubSenderCause.Kind.PULL_REQUEST_CREATED;
       } else if ("reopened".equals(action)
           || "synchronize".equals(action)
-          || "edited".equals(action)) {
+          || "edited".equals(action)
+          || "ready_for_review".equals(action)
+          || "converted_to_draft".equals(action)) {
         kind = GitHubSenderCause.Kind.PULL_REQUEST_UPDATED;
       } else if ("closed".equals(action)) {
         kind = GitHubSenderCause.Kind.PULL_REQUEST_DELETED;
