@@ -171,37 +171,36 @@ public class PullRequestGHEventSubscriber extends GHEventsSubscriber {
             return repoHost.equalsIgnoreCase(RepositoryUriResolver.hostnameFromApiUri(apiUri));
         }
 
-      @Override
-      public Cause[] asCauses() {
-        Cause[] causes = super.asCauses();
-        long senderId = getPayload().getSender().getId();
-        String senderLogin = getPayload().getSender().getLogin();
-        String senderName = null;
-        try {
-          senderName = getPayload().getSender().getName();
-        } catch (IOException e) {
-          LOGGER.warning("couldn't determine sender name");
+        @Override
+        public Cause[] asCauses() {
+            Cause[] causes = super.asCauses();
+            long senderId = getPayload().getSender().getId();
+            String senderLogin = getPayload().getSender().getLogin();
+            String senderName = null;
+            try {
+                senderName = getPayload().getSender().getName();
+            } catch (IOException e) {
+                LOGGER.warning("couldn't determine sender name");
+            }
+            GitHubSenderCause.Kind kind;
+            String action = getPayload().getAction();
+            if ("opened".equals(action)) {
+                kind = GitHubSenderCause.Kind.PULL_REQUEST_CREATED;
+            } else if ("reopened".equals(action)
+                    || "synchronize".equals(action)
+                    || "edited".equals(action)
+                    || "ready_for_review".equals(action)
+                    || "converted_to_draft".equals(action)) {
+                kind = GitHubSenderCause.Kind.PULL_REQUEST_UPDATED;
+            } else if ("closed".equals(action)) {
+                kind = GitHubSenderCause.Kind.PULL_REQUEST_DELETED;
+            } else {
+                kind = GitHubSenderCause.Kind.PULL_REQUEST_OTHER;
+            }
+            causes = ArrayUtils.addAll(
+                    causes, new Cause[] {new GitHubSenderCause(senderId, senderLogin, senderName, kind)});
+            return causes;
         }
-        GitHubSenderCause.Kind kind;
-        String action = getPayload().getAction();
-        if ("opened".equals(action)) {
-          kind = GitHubSenderCause.Kind.PULL_REQUEST_CREATED;
-        } else if ("reopened".equals(action)
-          || "synchronize".equals(action)
-          || "edited".equals(action)
-          || "ready_for_review".equals(action)
-          || "converted_to_draft".equals(action)) {
-          kind = GitHubSenderCause.Kind.PULL_REQUEST_UPDATED;
-        } else if ("closed".equals(action)) {
-          kind = GitHubSenderCause.Kind.PULL_REQUEST_DELETED;
-        } else {
-          kind = GitHubSenderCause.Kind.PULL_REQUEST_OTHER;
-        }
-        causes =
-          ArrayUtils.addAll(
-            causes, new Cause[] {new GitHubSenderCause(senderId, senderLogin, senderName, kind)});
-        return causes;
-      }
 
         @Override
         public boolean isMatch(@NonNull SCMNavigator navigator) {

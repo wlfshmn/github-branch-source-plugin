@@ -171,32 +171,31 @@ public class PushGHEventSubscriber extends GHEventsSubscriber {
             return repoHost.equalsIgnoreCase(RepositoryUriResolver.hostnameFromApiUri(apiUri));
         }
 
-      @Override
-      public Cause[] asCauses() {
-        Cause[] causes = super.asCauses();
-        long senderId = getPayload().getSender().getId();
-        String senderLogin = getPayload().getSender().getLogin();
-        String senderName = null;
-        try {
-          senderName = getPayload().getSender().getName();
-        } catch (IOException e) {
-          LOGGER.warning("couldn't determine sender name");
+        @Override
+        public Cause[] asCauses() {
+            Cause[] causes = super.asCauses();
+            long senderId = getPayload().getSender().getId();
+            String senderLogin = getPayload().getSender().getLogin();
+            String senderName = null;
+            try {
+                senderName = getPayload().getSender().getName();
+            } catch (IOException e) {
+                LOGGER.warning("couldn't determine sender name");
+            }
+            GitHubSenderCause.Kind kind;
+            if (getPayload().isCreated()) {
+                kind = GitHubSenderCause.Kind.BRANCH_CREATED;
+            } else if (getPayload().isDeleted()) {
+                kind = GitHubSenderCause.Kind.BRANCH_DELETED;
+            } else {
+                kind = GitHubSenderCause.Kind.BRANCH_UPDATED;
+            }
+            causes = ArrayUtils.addAll(
+                    causes, new Cause[] {new GitHubSenderCause(senderId, senderLogin, senderName, kind)});
+            return causes;
         }
-        GitHubSenderCause.Kind kind;
-        if (getPayload().isCreated()) {
-          kind = GitHubSenderCause.Kind.BRANCH_CREATED;
-        } else if (getPayload().isDeleted()) {
-          kind = GitHubSenderCause.Kind.BRANCH_DELETED;
-        } else {
-          kind = GitHubSenderCause.Kind.BRANCH_UPDATED;
-        }
-        causes =
-          ArrayUtils.addAll(
-            causes, new Cause[] {new GitHubSenderCause(senderId, senderLogin, senderName, kind)});
-        return causes;
-      }
 
-      /** {@inheritDoc} */
+        /** {@inheritDoc} */
         @Override
         public boolean isMatch(@NonNull SCMNavigator navigator) {
             return navigator instanceof GitHubSCMNavigator

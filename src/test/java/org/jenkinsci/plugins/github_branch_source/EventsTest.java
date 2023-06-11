@@ -83,11 +83,9 @@ public class EventsTest {
         PushGHEventSubscriber subscriber = new PushGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.CREATED;
-        firedEventCauses =
-            new Cause[]{
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_CREATED)
-                };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_CREATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pushEventCreated.json");
         waitAndAssertReceived(true);
     }
@@ -97,11 +95,9 @@ public class EventsTest {
         PushGHEventSubscriber subscriber = new PushGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.REMOVED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_DELETED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_DELETED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pushEventRemoved.json");
         waitAndAssertReceived(true);
     }
@@ -111,11 +107,9 @@ public class EventsTest {
         PushGHEventSubscriber subscriber = new PushGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.UPDATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_UPDATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.BRANCH_UPDATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pushEventUpdated.json");
         waitAndAssertReceived(true);
     }
@@ -125,11 +119,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.CREATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_CREATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_CREATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventCreated.json");
         waitAndAssertReceived(true);
     }
@@ -139,11 +131,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.REMOVED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_DELETED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_DELETED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventRemoved.json");
         waitAndAssertReceived(true);
     }
@@ -153,11 +143,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.UPDATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdated.json");
         waitAndAssertReceived(true);
     }
@@ -167,11 +155,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.UPDATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdatedSync.json");
         waitAndAssertReceived(true);
     }
@@ -181,11 +167,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.UPDATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdatedConvertedToDraft.json");
         waitAndAssertReceived(true);
     }
@@ -195,11 +179,9 @@ public class EventsTest {
         PullRequestGHEventSubscriber subscriber = new PullRequestGHEventSubscriber();
 
         firedEventType = SCMEvent.Type.UPDATED;
-        firedEventCauses =
-            new Cause[] {
-                new GitHubSenderCause(
-                    6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
-            };
+        firedEventCauses = new Cause[] {
+            new GitHubSenderCause(6752317, "baxterthehacker", null, GitHubSenderCause.Kind.PULL_REQUEST_UPDATED)
+        };
         ghEvent = callOnEvent(subscriber, "EventsTest/pullRequestEventUpdatedReadyForReview.json");
         waitAndAssertReceived(true);
     }
